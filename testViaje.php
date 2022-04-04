@@ -57,7 +57,7 @@ $ejecucion=true;
 do {
     print menu();
     $opc=trim(fgets(STDIN));
-    switch ($opc==1) {
+    switch ($opc) {
         case 'opcion 1':
             if($objViaje->PasajesDisponibles()){
                 echo "Ingrese los datos del pasajero: \n";
