@@ -166,12 +166,11 @@ public function reducir($pasajero){
         $pasajero1 = $this->MostrarPasajero();
         $Pasajeros = $this->getpasajero();
         $cantidad = count($Pasajeros);
-        $str = "
-        Viaje: {$this->getCodigo()}.\n
-        Destino: {$this->getDestinoStr()}.\n
-        cantidad maxima de pasajes: {$this->getCantidadMaxPasajeros()}.\n
-        pasajes vendidos: $cantidad.\n
-        Datos de los Pasajeros: \n $pasajero1";
+        $str = "Viaje: {$this->getCodigo()}.\n
+                Destino: {$this->getDestinoStr()}.\n
+                cantidad maxima de pasajes: {$this->getCantidadMaxPasajeros()}.\n
+                pasajes vendidos: $cantidad.\n
+                Datos de los Pasajeros: \n $pasajero1";
         return $str;
     }
     }
