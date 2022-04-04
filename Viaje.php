@@ -92,7 +92,7 @@ public function MostrarPasajero(){
  * modifica los datos del pasajero
  * @param array $pasajero1
  * @param obejct $pasajero
- * return boolean
+ * @return boolean
  */
 public function modificarDatos($pasajero,$pasajero1){
     //boolean $cambio 
@@ -110,7 +110,7 @@ public function modificarDatos($pasajero,$pasajero1){
 /**
  * verifica si quedan pasajes
  * @param obejct $pasajero
- * return boolean
+ * @return boolean
  */
 public function PasajesDisponibles(){
 //boolean $pasaje
@@ -124,7 +124,7 @@ public function PasajesDisponibles(){
 /**
  * incrementa los pasaje
  * @param obejct $pasajero
- *return boolean
+ * @return boolean
  */
 public function incremetar($pasajero){
     //bolean $incremento
@@ -143,9 +143,10 @@ public function incremetar($pasajero){
 /**
  * incrementa los pasaje
  * @param obejct $pasajero
- *return boolean
+ * @return boolean
  */
 public function reducir($pasajero){
+  //boolean $reducir
     $reducir = false;
     $pasaje = $this->getpasajero();
     if(in_array($pasajero, $pasaje)){
