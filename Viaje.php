@@ -112,11 +112,11 @@ public function MostrarPasajero(){
  * modifica los datos del pasajero
  * @param array $pasajero1
  * @param obejct $pasajero
- * @return boolean
+ * return boolean
  */
 public function modificarDatos($pasajero,$pasajero1){
     //boolean $cambio 
-       $cambio=false;
+       $cambio=true;
     $listPasajero=$this->getobjPasajero();
       /* if (in_array($pasajero, $listPasajero)) {
         $cod = array_search($pasajero, $listPasajero );
@@ -125,15 +125,14 @@ public function modificarDatos($pasajero,$pasajero1){
         $cambio = true;
     }*/
     $i=0;
-    while ($pasajero <= count($listPasajero)) {
+    while ($pasajero <= count($listPasajero)&& $cambio) {
         if ($pasajero==$listPasajero[$i]->getobjPasajero()){
+            $cambio=false;
            $listPasajero[$i]=$pasajero1;
-           $this->setobjPasajeros($listPasajero);
-            $cambio=true;
+           $this->setobjPasajeros($listPasajero);  
     }
     $i=$i++;
-    
-    }
+ }
     return $cambio;  
 }
 
