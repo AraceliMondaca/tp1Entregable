@@ -125,7 +125,7 @@ public function modificarDatos($pasajero,$pasajero1){
         $cambio = true;
     }*/
     $i=0;
-     while ($pasajero <= count($listPasajero)&& $cambio) {
+     while ($pasajero <= count($listPasajero) && $cambio) {
         if ($pasajero==$listPasajero[$i]->getobjPasajero()){
             $cambio=false;
            $this->setobjPasajeros($listPasajero);  
