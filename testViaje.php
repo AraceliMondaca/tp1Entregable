@@ -1,6 +1,7 @@
 <?php 
 //include_once'Viaje.php';
 require_once ('Viaje.php');
+require_once('personaResponsableV.php');
 echo "¡Información del Pasajero! \n";
 
 echo"Ingrese nombre: \n";
@@ -11,6 +12,10 @@ $apellido=trim(fgets(STDIN))."\n";
 echo"/--------------------------------/\n";
 echo"Ingrese el DNI: \n";
 $numDocumento=trim(fgets(STDIN))."\n";
+echo"/--------------------------------/\n";
+echo"Ingrese su Número de Telefono: \n";
+$telefono=trim(fgets(STDIN))."\n";
+echo"/--------------------------------/\n";
 echo "¡Información del Viaje! \n";
 echo"/--------------------------------/\n";
 echo"Ingrese destino: \n";
@@ -19,8 +24,8 @@ echo"/-------------------------------/\n";
 echo"Ingrese codigo del viaje: \n";
 $codigo=trim(fgets(STDIN))."\n";
 
-$objViaje=new Viaje($nombre,$apellido,$numDocumento,$destino,$codigo);
-
+$objViaje=new Viaje($nombre,$apellido,$numDocumento,$telefono,$destino,$codigo);
+$objPersonaRes=new personaResponsableV($numEmpleado,$numlicencia,$nombre,$apellido); 
 /**
  * es un string con el menu de opciones que pude realizar el cliente
  * @return int
@@ -35,29 +40,39 @@ function menu()
       "opcion 5 "."\n"."Modificar el destino del viaje: \n";
       "opcion 6 "."\n"."Modificar el codigo : \n"; 
       "opcion 7 "."\n"."Modificar la cantidad de pasajes : \n";
-      "opcion 8"."\n"."salir.\n";
+      "opcion 8"."\n"."Mostrar datos del responsable:\n";
+      "opcion 9"."\n"."Modificar datos del responable:\n";
+      "opcion 10"."\n"."salir.\n";
      
      
 return $menu;
 }
+
 /**
  * obtiene los datos y los devuelve en un arreglo
  */
 function obtenerDatos(){
-    echo"DNI\n";
-    $numeDocumento=strval(trim(fgets(STDIN)))."\n";
+   
     echo"Nombre\n";
     $nombre=trim(fgets(STDIN))."\n";
     echo"Apellido\n";
-    $apellido=trim(fgets(STDIN))."\n";
-    $pasajero=["DNI"=>$numeDocumento,"Nombre"=>$nombre,"Apellido"=>$apellido];
+    $apellido=trim(fgets(STDIN))."\n"; 
+    echo"DNI\n";
+    $numeDocumento=strval(trim(fgets(STDIN)))."\n";
+    echo "Telefono \n";
+    $telefono=trim(fgets(STDIN))."\n";
+    $pasajero=["Nombre"=>$nombre,
+               "Apellido"=>$apellido,
+               "DNI"=>$numeDocumento,
+               "Telefono"=>$telefono];
     return $pasajero;
-}
+} 
 $ejecucion=true;
+
 do {
     print menu();
     $opc=trim(fgets(STDIN));
-    switch ($opc) {
+    switch ($opc==1) {
         case 'opcion 1':
             if($objViaje->PasajesDisponibles()){
                 echo "Ingrese los datos del pasajero: \n";
@@ -94,7 +109,7 @@ do {
             break;
         
         
-       case 'opcion 5':
+       case 'opcion 6':
                 echo "El viaje posee el código: {$objViaje->getCodigo()}. \n";
                 echo "Ingrese el nuevo código: \n";
                 $codigo = trim(fgets(STDIN));
@@ -102,13 +117,28 @@ do {
                 $objViaje->setCodigo($codigo);
                 break;
         
-        case 'opcion 6':
+        case 'opcion 7':
             echo "El viaje posee {$objViaje->getCantidadMaxPasajeros()} de pasajes. \n";
             echo "Ingrese la nueva cantidad de pasajes: \n";
             $cantidadAsientos = trim(fgets(STDIN));
             $cantidadAsientos = intval($cantidadAsientos);
             $objViaje->setCantidadMaxPasajeros($cantidadAsientos);
             break;
+            case 'opcion 8':
+                $ResponsableV=$objViaje->getResponsableV();
+                echo $ResponsableV;
+                break;
+            
+            case 'opcion 9':
+                echo "modifique los datos del responsable:\n"."Numero de empleado:\n";
+                $numEmpleado=trim(fgets(STDIN))."\n";
+                echo"Ingrese numero de licencia:\n";
+                $numLicencia=trim(fgets(STDIN))."\n";
+                echo"Nombre responsable:\n";
+                $nombre=trim(fgets(STDIN))."\n";
+               echo"Apellido responsable:\n";
+              $apellido=trim(fgets(STDIN))."\n";
+                break;
 
         default:
             $ejecucion=false;
