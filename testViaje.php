@@ -3,7 +3,7 @@
 require_once ('Viaje.php');
 require_once('personaResponsableV.php');
 echo "¡Información del Pasajero! \n";
-
+echo"/--------------------------------/\n";
 echo"Ingrese nombre: \n";
 $nombre=trim(fgets(STDIN))."\n";
 echo"/--------------------------------/\n";
