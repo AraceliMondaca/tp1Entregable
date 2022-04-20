@@ -1,29 +1,33 @@
 <?php
 class Viaje{
   //atributos
-  private $pasajero=[];
+  private $objPasajero=[];
   private $destino;
   private $codigo;
-  private $cantidadPAsajeros;
+  private $cantidadPAsajeros=0;
   private $cantidadMaxPasajeros;
+  private $personaResp;
   //constructor
-  public function __construct($pasajero,$destino,$codigo,$cantidadPAsajeros,$cantidadMaxPasajeros){
+  //modificacion  que ahora los pasajeros sean un objeto que tenga los atributos nombre, apellido, numero de documento y teléfono
+  public function __construct($objPasajero,$destino,$codigo,$cantidadPAsajeros,$cantidadMaxPasajeros,$personaResp){
 
-    $this -> pasajero=$pasajero;
+    $this -> objPasajero=$objPasajero;
      //=['nombre'=>'araceli',                  
     //'apellido'=>'mondaca',                      
-   //'numDocumento'=>392509];
+   //'numDocumento'=>392509
+  //'telefono'=>234567];
     $this->destino=$destino;    
     $this->codigo=$codigo;
     $this->cantidadPAsajeros=$cantidadPAsajeros;
     $this->cantidadMaxPasajeros=$cantidadMaxPasajeros;
+    $this->personaResp=$personaResp;
    
   }
   //metodo
 
 
-    public function getpasajero() {
-       return $this->pasajero;
+    public function getobjPasajero() {
+       return $this->objPasajero;
     }
     public function nombre() {
         return $this->nombre;
@@ -31,8 +35,11 @@ class Viaje{
     public function getapellido() {
         return $this->apellido;
      }
-     public function getanumeroDocumento() {
+     public function getnumeroDocumento() {
         return $this->numeroDocumento;
+     }
+     public function getTelefono() {
+        return $this->getTelefono;
      }
      public function getdestino() {
         return $this->destino;
@@ -46,9 +53,12 @@ class Viaje{
      public function getcantidadMaxPasajeros() {
         return $this->getcantidadMaxPasajeros;
      }
-   
-     public function setpasajeros($pasajeros){
-        $this->pasajeros = $pasajeros;
+     public function getPersonaResp() {
+        return $this->getPersonaResp;
+     }
+     
+     public function setobjPasajeros($objPasajeros){
+        $this->objPasajeros = $objPasajeros;
     }
      public function setnombre($nombre) {
          $this->nombre=$nombre;
@@ -58,6 +68,9 @@ class Viaje{
     }
     public function setnumeroDocumento($numeroDocumento) {
         $this->numeroDocumento=$numeroDocumento;
+    }
+    public function setTelefono($telefono) {
+        $this->telefono=$telefono;
     }
     public function setdestino($destino) {
         $this->destino=$destino;
@@ -71,7 +84,10 @@ class Viaje{
     public function setcantidadMaxPasajeros($cantidadMaxPAsajeros) {
         $this->cantidadMaxPAsajeros=$cantidadMaxPAsajeros;
     }
-
+    public function setPersonaResp($personaResp) {
+        $this->personaResp=$personaResp;
+    }
+   
 
 /**
  *muestra los  pasajeros
@@ -79,11 +95,15 @@ class Viaje{
  */
 public function MostrarPasajero(){
     $MostrarPasajero = "";
-    foreach ($this->getpasajero() as $cod=> $value) {
+    foreach ($this->getobjPasajero() as $key=> $value) {
         $nombre = $value['nombre'];
         $apellido = $value['apellido'];
         $dni = $value['DNI'];
-        $MostrarPasajero = "Nombre:". $nombre."\n Apellido:". $apellido."\nDNI:". $dni."\n";
+        $telefono = $value['telefono'];
+        $MostrarPasajero = "Nombre:". $nombre.
+                        "\n Apellido:". $apellido. 
+                        "\n DNI:". $dni.
+                        "\n Telefono:".$telefono;
     }
     return $MostrarPasajero;
 }
@@ -92,17 +112,27 @@ public function MostrarPasajero(){
  * modifica los datos del pasajero
  * @param array $pasajero1
  * @param obejct $pasajero
- * @return boolean
+ * return boolean
  */
 public function modificarDatos($pasajero,$pasajero1){
     //boolean $cambio 
        $cambio=false;
-    $listPasajero=$this->getpasajero();
-    if (in_array($pasajero, $listPasajero)) {
+    $listPasajero=$this->getobjPasajero();
+      /* if (in_array($pasajero, $listPasajero)) {
         $cod = array_search($pasajero, $listPasajero );
             $listPasajero[$cod] = $pasajero1;
-            $this->setpasajeros($listPasajero); 
-        $boolean = true;
+            $this->setobjPasajeros($listPasajero); 
+        $cambio = true;
+    }*/
+    $i=0;
+    while ($pasajero <= count($listPasajero)) {
+        if ($pasajero==$listPasajero[$i]->getobjPasajero()){
+           $listPasajero[$i]=$pasajero1;
+           $this->setobjPasajeros($listPasajero);
+            $cambio=true;
+    }
+    $i=$i++;
+    
     }
     return $cambio;  
 }
@@ -110,12 +140,12 @@ public function modificarDatos($pasajero,$pasajero1){
 /**
  * verifica si quedan pasajes
  * @param obejct $pasajero
- * @return boolean
+ * return boolean
  */
 public function PasajesDisponibles(){
 //boolean $pasaje
     $pasaje = true;
-    if($this->getCantidadMaxPasajeros() <= (count($this->getPasajero()))){
+    if($this->getCantidadMaxPasajeros() <= (count($this->getobjPasajero()))){
         $pasaje = false;
     }
     return $pasaje;
@@ -124,17 +154,17 @@ public function PasajesDisponibles(){
 /**
  * incrementa los pasaje
  * @param obejct $pasajero
- * @return boolean
+ *return boolean
  */
 public function incremetar($pasajero){
     //bolean $incremento
     $incremento = false;   
-        $pasaje = $this->getpasajero();
-        if(in_array($pasajero, $this->getpasajero())){
+        $pasaje = $this->getobjPasajero();
+        if(in_array($pasajero, $this->getobjPasajero())){
             $incremento = false;
         }else{
             array_push($pasaje, $pasajero);
-            $this->setpasajeros($pasaje);
+            $this->setobjPasajeros($pasaje);
             $incremento = true;
         }
         return $incremento;  
@@ -143,12 +173,11 @@ public function incremetar($pasajero){
 /**
  * incrementa los pasaje
  * @param obejct $pasajero
- * @return boolean
+ *return boolean
  */
 public function reducir($pasajero){
-  //boolean $reducir
     $reducir = false;
-    $pasaje = $this->getpasajero();
+    $pasaje = $this->getobjPasajero();
     if(in_array($pasajero, $pasaje)){
         $cod = array_search($pasajero, $pasaje);
         array_splice($pasaje, $cod, 1);
@@ -159,19 +188,26 @@ public function reducir($pasajero){
 }
 
 
+
     /**
      * 
      */
     public function ___stoString(){
         $pasajero1 = $this->MostrarPasajero();
-        $Pasajeros = $this->getpasajero();
+        $Pasajeros = $this->getobjPasajero();
         $cantidad = count($Pasajeros);
-        $str = "Viaje: {$this->getCodigo()}.\n
-                Destino: {$this->getDestinoStr()}.\n
-                cantidad maxima de pasajes: {$this->getCantidadMaxPasajeros()}.\n
-                pasajes vendidos: $cantidad.\n
-                Datos de los Pasajeros: \n $pasajero1";
+       
+        $str = "
+        Viaje: {$this->getCodigo()}.\n
+        Destino: {$this->getDestinoStr()}.\n
+        cantidad maxima de pasajes: {$this->getCantidadMaxPasajeros()}.\n
+        pasajes vendidos: $cantidad.\n
+        Datos de los Pasajeros: \n $pasajero1
+        persona responsable: {$this->getPersonaResp()}";
+        
         return $str;
     }
-    }
+   
+}
+
  ?>
