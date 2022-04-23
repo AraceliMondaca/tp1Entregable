@@ -42,11 +42,25 @@ class objPersona{
    }
 
 
+public function pasajeroPre(){
+   
+    $persona1= array();
+    $persona1[0]=array('Nombre'=>'Anne','apellido'=>'Escamilla','documento'=>38465189,'telefono'=>44785632);
+    $persona1[1]=array('Nombre'=>'Herry','apellido'=>'Lopez','documento'=>338465189,'telefono'=>44785632);
+    $persona1[2]=array('Nombre'=>'Tomm','apellido'=>'Martinez','documento'=>338465189,'telefono'=>44785632);
+    
+                     for ($i=0; $i <count($persona1) ; $i++) { 
+                        $persona1[$i];
+                     }
+
+                    return print_r($persona1) ;
+}
+
    public function __stoString() {
        $persona="Nombre: ".$this->getNombre().
-                "\n Apeliido: ".$this->getapellido(). 
-                "\n DNI: ".$this->getnumeroDocumento().
-                "\n Telefono: ".$this->getTelefono(); 
+       "\n Apeliido: ".$this->getapellido(). 
+       "\n DNI: ".$this->getnumeroDocumento().
+       "\n Telefono: ".$this->getTelefono(); 
        }
 }
 ?>
