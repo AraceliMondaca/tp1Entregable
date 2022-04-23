@@ -2,6 +2,7 @@
 //include_once'Viaje.php';
 require_once ('Viaje.php');
 require_once('personaResponsableV.php');
+require_oncec('objPersona.php');
 echo "¡Información del Pasajero! \n";
 echo"/--------------------------------/\n";
 echo"Ingrese nombre: \n";
