@@ -27,6 +27,8 @@ $codigo=trim(fgets(STDIN))."\n";
 
 $objViaje=new Viaje($nombre,$apellido,$numDocumento,$telefono,$destino,$codigo);
 $objPersonaRes=new personaResponsableV($numEmpleado,$numlicencia,$nombre,$apellido); 
+$objPersonas=new objPersona($nombre,$apellido,$numDocumento,$telefono);
+$objPersonas=$objPersonas->pasajeroPre();
 /**
  * es un string con el menu de opciones que pude realizar el cliente
  * @return int
@@ -126,7 +128,7 @@ do {
             $objViaje->setCantidadMaxPasajeros($cantidadAsientos);
             break;
             case 'opcion 8':
-                $ResponsableV=$objViaje->getResponsableV();
+                $ResponsableV=$objPersonaRes;
                 echo $ResponsableV;
                 break;
             
