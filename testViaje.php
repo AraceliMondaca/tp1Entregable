@@ -26,9 +26,11 @@ echo"Ingrese codigo del viaje: \n";
 $codigo=trim(fgets(STDIN))."\n";
 
 $objViaje=new Viaje($nombre,$apellido,$numDocumento,$telefono,$destino,$codigo);
-$objPersonaRes=new personaResponsableV($numEmpleado,$numlicencia,$nombre,$apellido); 
+//$objPersonaRes=new personaResponsableV($numEmpleado,$numlicencia,$nombre,$apellido); 
 $objPersonas=new objPersona($nombre,$apellido,$numDocumento,$telefono);
 $objPersonas=$objPersonas->pasajeroPre();
+$objPersonaRes=new personaResponsableV(0045,214700,'Luciano','Pereyra'); 
+echo "\n".$objPersonaRes ."\n";
 /**
  * es un string con el menu de opciones que pude realizar el cliente
  * @return int
