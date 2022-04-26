@@ -30,7 +30,7 @@ $objViaje=new Viaje($nombre,$apellido,$numDocumento,$telefono,$destino,$codigo);
 $objPersonas=new objPersona($nombre,$apellido,$numDocumento,$telefono);
 $objPersonas=$objPersonas->pasajeroPre();
 $objPersonaRes=new personaResponsableV(0045,214700,'Luciano','Pereyra'); 
-echo "\n".$objPersonaRes ."\n";
+echo  "\n Personal a cargo:\n ".$objPersonaRes ."\n";
 /**
  * es un string con el menu de opciones que pude realizar el cliente
  * @return int
